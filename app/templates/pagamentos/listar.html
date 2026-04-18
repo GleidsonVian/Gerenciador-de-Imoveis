@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Pagamentos</h2>
+    <a href="/pagamentos/novo" class="btn btn-primary">+ Novo Pagamento</a>
+</div>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Inquilino</th>
+            <th>Imóvel</th>
+            <th>Valor</th>
+            <th>Vencimento</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in pagamentos %}
+        <tr>
+            <td>{{ p.inquilino.nome }}</td>
+            <td>{{ p.imovel.endereco }}</td>
+            <td>R$ {{ "%.2f"|format(p.valor) }}</td>
+            <td>{{ p.data_vencimento.strftime("%d/%m/%Y") }}</td>
+            <td>{{ p.data_pagamento.strftime("%d/%m/%Y") if p.data_pagamento else "-" }}</td>
+            <td>
+                <span class="badge 
+                    {% if p.status == 'pago' %}bg-success
+                    {% elif p.status == 'atrasado' %}bg-danger
+                    {% else %}bg-warning text-dark{% endif %}">
+                    {{ p.status }}
+                </span>
+            </td>
+            <td>
+                {% if p.status != 'pago' %}
+                <form action="/pagamentos/{{ p.id }}/pagar" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-success">Pagar</button>
+                </form>
+                {% endif %}
+                <form action="/pagamentos/{{ p.id }}/deletar" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Deletar?')">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Total de Imóveis</h5>
+                <p class="card-text fs-2 fw-bold">{{ total_imoveis }}</p>
+                <small>{{ imoveis_alugados }} alugados · {{ imoveis_disponiveis }} disponíveis</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Total de Inquilinos</h5>
+                <p class="card-text fs-2 fw-bold">{{ total_inquilinos }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-secondary">
+            <div class="card-body">
+                <h5 class="card-title">Total de Pagamentos</h5>
+                <p class="card-text fs-2 fw-bold">{{ total_pagamentos }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card border-warning">
+            <div class="card-body">
+                <h5 class="card-title text-warning">⏳ Pendentes</h5>
+                <p class="card-text fs-2 fw-bold">{{ pagamentos_pendentes }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-success">
+            <div class="card-body">
+                <h5 class="card-title text-success">✅ Pagos</h5>
+                <p class="card-text fs-2 fw-bold">{{ pagamentos_pagos }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-danger">
+            <div class="card-body">
+                <h5 class="card-title text-danger">❌ Atrasados</h5>
+                <p class="card-text fs-2 fw-bold">{{ pagamentos_atrasados }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

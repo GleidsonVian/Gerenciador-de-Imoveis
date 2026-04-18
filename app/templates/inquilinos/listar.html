@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Inquilinos</h2>
+    <a href="/inquilinos/novo" class="btn btn-primary">+ Novo Inquilino</a>
+</div>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Imóvel</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inquilino in inquilinos %}
+        <tr>
+            <td>{{ inquilino.nome }}</td>
+            <td>{{ inquilino.cpf }}</td>
+            <td>{{ inquilino.email or "-" }}</td>
+            <td>{{ inquilino.telefone or "-" }}</td>
+            <td>{{ inquilino.imovel.endereco if inquilino.imovel else "-" }}</td>
+            <td>
+                <a href="/inquilinos/{{ inquilino.id }}/editar" class="btn btn-sm btn-secondary">Editar</a>
+                <form action="/inquilinos/{{ inquilino.id }}/deletar" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Deletar?')">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

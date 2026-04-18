@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Imóveis</h2>
+    <a href="/imoveis/novo" class="btn btn-primary">+ Novo Imóvel</a>
+</div>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Endereço</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for imovel in imoveis %}
+        <tr>
+            <td>{{ imovel.endereco }}</td>
+            <td>{{ imovel.tipo }}</td>
+            <td>R$ {{ "%.2f"|format(imovel.valor_aluguel) }}</td>
+            <td>
+                <span class="badge {% if imovel.status == 'disponivel' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                    {{ imovel.status }}
+                </span>
+            </td>
+            <td>
+                <a href="/imoveis/{{ imovel.id }}/editar" class="btn btn-sm btn-secondary">Editar</a>
+                <form action="/imoveis/{{ imovel.id }}/deletar" method="post" class="d-inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Deletar?')">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
