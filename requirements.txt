@@ -5,3 +5,7 @@ pymysql
 python-dotenv
 jinja2
 python-multipart
+apscheduler
+python-jose[cryptography]
+passlib[bcrypt]
+argon2-cffi

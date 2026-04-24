@@ -4,6 +4,26 @@
     <h2>Imóveis</h2>
     <a href="/imoveis/novo" class="btn btn-primary">+ Novo Imóvel</a>
 </div>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-6">
+        <input type="text" name="busca" class="form-control" placeholder="Buscar por endereço..." value="{{ busca }}">
+    </div>
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">Todos os status</option>
+            <option value="disponivel" {% if status == 'disponivel' %}selected{% endif %}>Disponível</option>
+            <option value="alugado" {% if status == 'alugado' %}selected{% endif %}>Alugado</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-secondary w-100">Filtrar</button>
+    </div>
+    <div class="col-md-1">
+        <a href="/imoveis/" class="btn btn-outline-secondary w-100">✕</a>
+    </div>
+</form>
+
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
@@ -32,6 +52,8 @@
                 </form>
             </td>
         </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center text-muted">Nenhum imóvel encontrado.</td></tr>
         {% endfor %}
     </tbody>
 </table>

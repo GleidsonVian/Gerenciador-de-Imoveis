@@ -4,6 +4,24 @@
     <h2>Pagamentos</h2>
     <a href="/pagamentos/novo" class="btn btn-primary">+ Novo Pagamento</a>
 </div>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-8">
+        <select name="status" class="form-select">
+            <option value="">Todos os status</option>
+            <option value="pendente" {% if status == 'pendente' %}selected{% endif %}>Pendente</option>
+            <option value="pago" {% if status == 'pago' %}selected{% endif %}>Pago</option>
+            <option value="atrasado" {% if status == 'atrasado' %}selected{% endif %}>Atrasado</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-secondary w-100">Filtrar</button>
+    </div>
+    <div class="col-md-2">
+        <a href="/pagamentos/" class="btn btn-outline-secondary w-100">✕ Limpar</a>
+    </div>
+</form>
+
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
@@ -25,7 +43,7 @@
             <td>{{ p.data_vencimento.strftime("%d/%m/%Y") }}</td>
             <td>{{ p.data_pagamento.strftime("%d/%m/%Y") if p.data_pagamento else "-" }}</td>
             <td>
-                <span class="badge 
+                <span class="badge
                     {% if p.status == 'pago' %}bg-success
                     {% elif p.status == 'atrasado' %}bg-danger
                     {% else %}bg-warning text-dark{% endif %}">
@@ -43,6 +61,8 @@
                 </form>
             </td>
         </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-center text-muted">Nenhum pagamento encontrado.</td></tr>
         {% endfor %}
     </tbody>
 </table>

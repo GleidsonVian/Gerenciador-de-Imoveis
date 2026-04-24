@@ -4,6 +4,19 @@
     <h2>Inquilinos</h2>
     <a href="/inquilinos/novo" class="btn btn-primary">+ Novo Inquilino</a>
 </div>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-8">
+        <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou CPF..." value="{{ busca }}">
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-secondary w-100">Filtrar</button>
+    </div>
+    <div class="col-md-2">
+        <a href="/inquilinos/" class="btn btn-outline-secondary w-100">✕ Limpar</a>
+    </div>
+</form>
+
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
@@ -30,6 +43,8 @@
                 </form>
             </td>
         </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center text-muted">Nenhum inquilino encontrado.</td></tr>
         {% endfor %}
     </tbody>
 </table>
